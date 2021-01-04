@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+    <script>
+        setTimeout(function(){
+            location.reload();
+        },5000); 
+    </script>
+    
+    <div class="container">
+
+     
+        <br>
+        <br>
+        
+        <h3> Jugadores de CS:GO en {{current_user.pais}}</h3>
+        <h7>(Nombre de usuario ; Rango ; Nombre in-Game ; Email)</h7>
+        <br>
+        <br>
+
+        <div>
+            {% for elemento in lista %}
+                {% if elemento.username != current_user.username and (elemento.csgo == True) and (elemento.connected_csgo == True)%}
+                    <article class="media content-section">
+                        <img class="rounded-circle article-img" src= "{{ url_for('static', filename='profile_pics/' + elemento.image_file) }}">
+                        <div class="media-body">
+                            <div class="article-metadata">
+                                <a class="mr-2" href="{{ url_for('user_profile', username=elemento.username) }}">{{ elemento.username }}</a>
+                                <small class="text-muted">{{ elemento.rango_csgo }} ; {{elemento.name_csgo}} ; {{ elemento.email }}</small>
+                            </div>
+                        </div>
+                    </article>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock content %}

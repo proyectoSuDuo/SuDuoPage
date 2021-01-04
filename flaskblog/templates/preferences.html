@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ image_file }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{current_user.username}}</h2>
+                {% if current_user.rango_csgo != "No juega" %}
+                    <p class="text-secondary">CSGO: {{current_user.rango_csgo}} \ {{ current_user.name_csgo }}</p>
+                {% endif %}
+                
+                {% if current_user.rango_lol != "No juega" %}
+                    <p class="text-secondary">LoL: {{current_user.rango_lol}} \ {{ current_user.name_lol }}</p>
+                {% endif %}
+           </div>
+        </div>
+
+
+     <div class="container">
+
+     
+      <br>
+      <br>
+
+    
+ 
+      </div >
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Cambiar preferencias de juegos</legend>
+                <div>
+                    Que juegas?: 
+                </div>
+                <br>
+                <div>
+                    {{ form.lol() }} LoL {{ form.rango_lol() }}    
+                </div>
+                <div class="form-group">
+                    {{ form.name_lol.label(class="form-control-label") }}
+
+                    {% if form.name_lol.errors %}
+                        {{ form.name_lol(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.name_lol.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name_lol(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <br>
+                <div>
+                    {{ form.csgo() }} CSGO {{ form.rango_csgo() }} 
+                </div>
+                <div class="form-group">
+                    {{ form.name_csgo.label(class="form-control-label") }}
+
+                    {% if form.name_csgo.errors %}
+                        {{ form.name_csgo(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.name_csgo.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name_csgo(class="form-control form-control-lg") }}
+                    {% endif %}
+                <br>
+                <br>
+
+                
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    
+</div>
+
+
+{% endblock content %}

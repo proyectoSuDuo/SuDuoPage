@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+    <script>
+        setTimeout(function(){
+            location.reload();
+        },5000); 
+    </script>
+
+    <div class="container">
+
+     
+        <br>
+        <br>
+     
+        <h3> Jugadores de League of leyends en {{current_user.pais}}</h3>
+        <h7>(Nombre de usuario ; Rango ; Nombre in-Game ; Email)</h7>
+        <br>
+        <h7>¡Hola! Te encontre en SuDuo, ¿juegas?</h7>
+        <br>
+        <br>
+        
+        <div id="content">
+            {% for elemento in lista %}
+                {% if elemento.username != current_user.username and (elemento.lol == True) and (elemento.connected_lol == True) %}
+                    <article class="media content-section">
+                        <img class="rounded-circle article-img" src= "{{ url_for('static', filename='profile_pics/' + elemento.image_file) }}">
+                        <div class="media-body">
+                            <div class="article-metadata">
+                                <a class="mr-2" href="{{ url_for('user_profile', username=elemento.username) }}">{{ elemento.username }}</a>
+                                <small class="text-muted">{{ elemento.rango_lol }} ; {{elemento.name_csgo}} ; {{ elemento.email }} ; {{elemento.entrenador}} </small>
+                            </div>
+                        </div>
+                    </article>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
